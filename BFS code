@@ -1,0 +1,32 @@
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque()
+
+    visited.add(start)
+    queue.append(start)
+
+    print("BFS Traversal:")
+
+    while queue:
+        vertex = queue.popleft()
+        print(vertex, end=" ")
+
+        for neighbour in graph[vertex]:
+            if neighbour not in visited:
+                visited.add(neighbour)
+                queue.append(neighbour)
+
+graph = {}
+
+n = int(input("Enter number of rooms: "))
+
+for i in range(n):
+    room = input("Enter room name: ")
+    neighbours = input("Enter connected rooms (space separated): ").split()
+    graph[room] = neighbours
+
+start = input("Enter starting room: ")
+
+bfs(graph, start)
