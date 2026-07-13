@@ -1,0 +1,37 @@
+Step 1: Start
+
+Step 2: Create a graph.
+
+Step 3: Create an empty visited set.
+
+Step 4: Create an empty queue.
+
+Step 5: Mark the starting node as visited.
+
+Step 6: Insert the starting node into the queue.
+
+Step 7: While the queue is not empty:
+            a) Remove the front node from the queue.
+            b) Print the node.
+            c) For each adjacent node:
+                   If it is not visited:
+                      Mark it as visited.
+                      Insert it into the queue.
+
+Step 8: Stop.
+
+ALGORITHM (Text format)
+Start the program.
+Represent the graph using an adjacency list, where each node represents a room and each edge represents a path between rooms.
+Choose the starting node from which the traversal begins.
+Create an empty set called visited to keep track of visited nodes.
+Create an empty queue to store the nodes that need to be explored.
+Mark the starting node as visited and insert it into the queue.
+Repeat the following steps until the queue becomes empty:
+Remove the front node from the queue.
+Display the removed node.
+Visit each adjacent (neighboring) node of the current node.
+If an adjacent node has not been visited:
+Mark it as visited.
+Insert it into the queue.
+Stop when all reachable nodes have been visited and the queue becomes empty.
