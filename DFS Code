@@ -1,0 +1,29 @@
+# DFS Function
+def dfs(graph, room, visited):
+    if room not in visited:
+        print(room, end=" ")
+        visited.add(room)
+
+        for neighbour in graph[room]:
+            dfs(graph, neighbour, visited)
+# Main Program
+graph = {}
+
+# Number of rooms
+n = int(input("Enter the number of rooms in the cave: "))
+
+print("\nDesign the cave by entering the connected rooms.")
+
+# Input the cave structure
+for i in range(n):
+    room = input(f"\nEnter Room {i+1} name: ")
+    neighbours = input(f"Enter rooms connected to {room} (space separated): ").split()
+    graph[room] = neighbours
+
+# Starting room
+start = input("\nEnter the starting room for the rescue drone: ")
+
+visited = set()
+
+print("\nDFS Traversal of the Cave:")
+dfs(graph, start, visited)
