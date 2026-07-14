@@ -1,0 +1,21 @@
+Step 1: Start.
+
+Step 2: Read the number of rooms.
+
+Step 3: Input each room and its connected rooms.
+
+Step 4: Read the starting room.
+
+Step 5: Create an empty visited set.
+
+Step 6: Visit the starting room.
+
+Step 7: Mark it as visited.
+
+Step 8: For each connected room:
+            If it is not visited,
+            recursively perform DFS.
+
+Step 9: Repeat until all reachable rooms are visited.
+
+Step 10: Stop.
