@@ -1,0 +1,21 @@
+Algorithm for the Given Uniform Cost Search (UCS) Code
+Start.
+Import the heapq module to implement a priority queue.
+Define the uniform_cost_search(graph, start, goal) function.
+Initialize a priority queue with the source node, cost 0, and the initial path containing only the source node.
+Create an empty dictionary visited to store the minimum cost of reaching each node.
+Repeat while the priority queue is not empty:
+Remove the node with the lowest cumulative cost from the priority queue.
+If the current node is the destination, return the path and total cost.
+If the current node has already been visited with an equal or lower cost, skip it.
+Otherwise, record the current cost in the visited dictionary.
+For each neighboring node:
+Calculate the new cumulative cost.
+Insert the neighbor, updated cost, and updated path into the priority queue.
+If the priority queue becomes empty and the destination is not found, return "No path found."
+Read the graph details (nodes, neighbors, and edge costs) from the user.
+Read the source and destination nodes.
+Call the uniform_cost_search() function.
+If a path is found, display the least-cost path and the total transportation cost.
+Otherwise, display "No path found."
+Stop.
