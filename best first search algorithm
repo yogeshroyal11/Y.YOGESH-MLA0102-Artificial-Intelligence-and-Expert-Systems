@@ -1,0 +1,15 @@
+Algorithm
+Initialize the graph and heuristic values.
+Create an empty priority queue (OPEN list).
+Insert the source node into the priority queue with its heuristic value.
+Mark the source as visited.
+Repeat until the priority queue becomes empty:
+Remove the node having the smallest heuristic value.
+If the selected node is the goal node, terminate the search.
+Otherwise, expand all its neighboring nodes.
+For every unvisited neighbor:
+Mark it as visited.
+Store its parent.
+Insert it into the priority queue based on its heuristic value.
+Trace back from the goal node to the source using the parent dictionary.
+Display the path found.
