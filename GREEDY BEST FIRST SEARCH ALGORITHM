@@ -1,0 +1,15 @@
+Algorithm
+Define the warehouse graph and heuristic values.
+Create an OPEN list using a priority queue.
+Insert the start node into the priority queue.
+Mark the start node as visited.
+Repeat until the priority queue becomes empty:
+Remove the node with the smallest heuristic value.
+If the current node is the goal node, stop.
+Otherwise, expand all neighboring nodes.
+For each unvisited neighbor:
+Mark it as visited.
+Store its parent node.
+Insert it into the priority queue according to its heuristic value.
+Trace the path from the goal node back to the source.
+Display the path found.
