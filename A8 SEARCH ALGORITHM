@@ -1,0 +1,23 @@
+Algorithm
+Initialize the graph with edge costs and heuristic values.
+Create an OPEN list (priority queue) and a CLOSED set.
+Insert the source node into the OPEN list with:
+g(n)=0
+f(n)=g(n)+h(n)
+Repeat until the OPEN list is empty:
+Remove the node with the lowest f(n).
+If the node is the goal, stop.
+Otherwise, add it to the CLOSED set.
+For each neighboring node:
+
+Calculate the new path cost:
+
+g(neighbor)=g(current)+edge cost
+
+Compute:
+
+f(neighbor)=g(neighbor)+h(neighbor)
+If this path is better than the previous one, update the cost and parent.
+Insert the neighbor into the OPEN list.
+Trace back from the goal to the source using the parent dictionary.
+Display the optimal path and total path cost.
