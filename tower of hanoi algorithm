@@ -1,0 +1,13 @@
+Algorithm
+Start.
+Read the number of disks n.
+If n == 1, move the disk directly from the source rod to the destination rod.
+Otherwise:
+Move the top n−1 disks from the source rod to the auxiliary rod.
+Move the largest disk from the source rod to the destination rod.
+Move the n−1 disks from the auxiliary rod to the destination rod.
+
+Print the minimum number of moves using the formula:
+
+Minimum Moves=2^n -1
+Stop.
