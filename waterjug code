@@ -1,0 +1,28 @@
+# Water Jug Problem
+# Jug1 = 4 Liters, Jug2 = 3 Liters
+# Goal = 2 Liters in Jug1
+
+jug1 = 0
+jug2 = 0
+
+print("Initial State:", (jug1, jug2))
+
+# Step 1: Fill Jug2
+jug2 = 3
+print("Fill Jug2:", (jug1, jug2))
+
+# Step 2: Pour Jug2 into Jug1
+jug1 = 3
+jug2 = 0
+print("Pour Jug2 -> Jug1:", (jug1, jug2))
+
+# Step 3: Fill Jug2 again
+jug2 = 3
+print("Fill Jug2:", (jug1, jug2))
+
+# Step 4: Pour Jug2 into Jug1 until Jug1 is full
+jug1 = 4
+jug2 = 2
+print("Pour Jug2 -> Jug1:", (jug1, jug2))
+
+print("\nGoal Achieved: 2 Liters in Jug2")
