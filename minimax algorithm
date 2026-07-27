@@ -1,0 +1,6 @@
+Algorithm
+Define the minimax() function.
+If the leaf node is reached, return its value.
+If it is the Maximizer's turn, return the maximum of the two child values.
+If it is the Minimizer's turn, return the minimum of the two child values.
+Print the best value chosen by the Minimax algorithm.
