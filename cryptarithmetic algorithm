@@ -1,0 +1,8 @@
+Algorithm
+Import the permutations function.
+Store all unique letters in a string.
+Generate all possible digit assignments.
+Skip assignments where S or M is 0.
+Convert SEND, MORE, and MONEY into numbers.
+Check if SEND + MORE = MONEY.
+If true, print the solution and stop.
