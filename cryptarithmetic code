@@ -1,0 +1,32 @@
+from itertools import permutations
+
+letters = "SENDMORY"
+
+for p in permutations("0123456789", 8):
+
+    S, E, N, D, M, O, R, Y = p
+
+    # First letters cannot be zero
+    if S == '0' or M == '0':
+        continue
+
+    send = int(S + E + N + D)
+    more = int(M + O + R + E)
+    money = int(M + O + N + E + Y)
+
+    if send + more == money:
+        print("Solution Found!")
+        print("SEND  =", send)
+        print("MORE  =", more)
+        print("MONEY =", money)
+
+        print("\nLetter Values:")
+        print("S =", S)
+        print("E =", E)
+        print("N =", N)
+        print("D =", D)
+        print("M =", M)
+        print("O =", O)
+        print("R =", R)
+        print("Y =", Y)
+        break
