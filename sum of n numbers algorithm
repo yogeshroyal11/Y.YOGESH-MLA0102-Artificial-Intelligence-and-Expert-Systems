@@ -1,0 +1,9 @@
+Algorithm: Sum of Natural Numbers Using Recursion
+Start.
+Read the value of N.
+Define a recursive function sum_n(n).
+If n == 1, return 1 (base case).
+Otherwise, return n + sum_n(n - 1) (recursive case).
+Call the function with N.
+Display the sum.
+Stop.
