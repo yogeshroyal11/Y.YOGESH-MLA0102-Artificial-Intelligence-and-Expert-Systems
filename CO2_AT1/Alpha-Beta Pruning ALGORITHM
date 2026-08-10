@@ -1,0 +1,46 @@
+Algorithm: Alpha-Beta Pruning
+
+Input:
+    Game tree
+    Current node
+    Alpha
+    Beta
+    Player type
+
+Output:
+    Best value for MAX
+
+Steps:
+
+1. If the current node is a terminal node:
+       Return its utility value.
+
+2. If the current player is MAX:
+
+       Set value = -∞.
+
+       For each child:
+           value = maximum(value,
+                           AlphaBeta(child, alpha, beta, MIN))
+
+           alpha = maximum(alpha, value)
+
+           If alpha >= beta:
+               Prune the remaining children.
+
+       Return value.
+
+3. If the current player is MIN:
+
+       Set value = +∞.
+
+       For each child:
+           value = minimum(value,
+                           AlphaBeta(child, alpha, beta, MAX))
+
+           beta = minimum(beta, value)
+
+           If beta <= alpha:
+               Prune the remaining children.
+
+       Return value.
