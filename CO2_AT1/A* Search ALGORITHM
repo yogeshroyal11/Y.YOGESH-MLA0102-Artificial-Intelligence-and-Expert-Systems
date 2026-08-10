@@ -32,3 +32,9 @@ Steps:
                  Update its cost and parent.
                  Insert/update it in OPEN.
 7. If OPEN becomes empty, return FAILURE.
+
+A* Formula
+f(n) = g(n) + h(n)
+g(n) = Actual cost from Start to n
+h(n) = Estimated cost from n to Goal
+f(n) = Estimated total cost of the path
