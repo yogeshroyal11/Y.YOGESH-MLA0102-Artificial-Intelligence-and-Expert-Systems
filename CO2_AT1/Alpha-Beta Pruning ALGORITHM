@@ -44,3 +44,12 @@ Steps:
                Prune the remaining children.
 
        Return value.
+
+Initial Values:
+alpha = -∞
+beta  = +∞
+
+Pruning Condition:
+If alpha >= beta:
+       Stop exploring that branch.
+
