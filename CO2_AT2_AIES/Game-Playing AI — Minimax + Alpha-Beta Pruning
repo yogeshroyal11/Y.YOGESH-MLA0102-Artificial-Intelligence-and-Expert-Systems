@@ -1,0 +1,13 @@
+ALGORITHM MINIMAX
+
+1. Start at the root game state.
+2. Generate all possible moves.
+3. If the current state is a terminal state:
+      Return its score.
+4. If it is MAX's turn:
+      Select the maximum value.
+5. If it is MIN's turn:
+      Select the minimum value.
+6. Propagate the values back to the root.
+7. Select the move with the highest value.
+8. Stop.
