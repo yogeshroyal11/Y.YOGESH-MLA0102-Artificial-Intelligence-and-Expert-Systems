@@ -1,0 +1,126 @@
+# CSP Examination Scheduling
+# Backtracking + MRV + Forward Checking
+
+exams = {
+    'E1': 100,
+    'E2': 80,
+    'E3': 70,
+    'E4': 60,
+    'E5': 90,
+    'E6': 50
+}
+
+slots = ['T1', 'T2', 'T3', 'T4']
+
+halls = {
+    'A': 120,
+    'B': 90,
+    'C': 60
+}
+
+conflicts = [
+    ('E1', 'E2'),
+    ('E1', 'E3'),
+    ('E2', 'E4'),
+    ('E3', 'E5'),
+    ('E4', 'E6'),
+    ('E2', 'E5')
+]
+
+# Create domains
+domains = {}
+
+for exam in exams:
+    domains[exam] = []
+
+    for slot in slots:
+        for hall in halls:
+
+            if exams[exam] <= halls[hall]:
+                domains[exam].append((slot, hall))
+
+
+def is_valid(exam, value, assignment):
+
+    slot, hall = value
+
+    for other_exam, other_value in assignment.items():
+
+        other_slot, other_hall = other_value
+
+        # Same hall and same time
+        if slot == other_slot and hall == other_hall:
+            return False
+
+        # Student conflict
+        if (exam, other_exam) in conflicts or \
+           (other_exam, exam) in conflicts:
+
+            if slot == other_slot:
+                return False
+
+    return True
+
+
+def backtrack(assignment, current_domains):
+
+    if len(assignment) == len(exams):
+        return assignment
+
+    # MRV
+    unassigned = [
+        e for e in exams if e not in assignment
+    ]
+
+    exam = min(
+        unassigned,
+        key=lambda e: len(current_domains[e])
+    )
+
+    for value in current_domains[exam]:
+
+        if is_valid(exam, value, assignment):
+
+            assignment[exam] = value
+
+            # Forward checking
+            new_domains = {
+                e: list(current_domains[e])
+                for e in current_domains
+            }
+
+            failed = False
+
+            for other in unassigned:
+
+                if other != exam:
+
+                    new_domains[other] = [
+                        v for v in new_domains[other]
+                        if is_valid(other, v, assignment)
+                    ]
+
+                    if len(new_domains[other]) == 0:
+                        failed = True
+                        break
+
+            if not failed:
+                result = backtrack(
+                    assignment,
+                    new_domains
+                )
+
+                if result:
+                    return result
+
+            del assignment[exam]
+
+    return None
+
+
+solution = backtrack({}, domains)
+
+print("Examination Timetable")
+
+for exam, value in solution.items():
+    print(exam, ":", value)
