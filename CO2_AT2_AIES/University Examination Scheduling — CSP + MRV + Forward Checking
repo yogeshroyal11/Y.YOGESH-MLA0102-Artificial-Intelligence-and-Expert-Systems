@@ -1,0 +1,15 @@
+ALGORITHM CSP_SCHEDULING
+
+1. Create variables E1, E2, E3, E4, E5, E6.
+2. Assign possible time slots and halls to each exam.
+3. Apply hall-capacity constraints.
+4. Select the unassigned exam with the smallest domain using MRV.
+5. Assign a valid time slot and hall.
+6. Apply Forward Checking:
+      Remove conflicting values from neighbouring exams.
+7. If any domain becomes empty:
+      Backtrack to the previous assignment.
+8. Otherwise, select the next exam using MRV.
+9. Repeat Steps 5–8 until all exams are assigned.
+10. Return the valid examination timetable.
+11. Stop.
