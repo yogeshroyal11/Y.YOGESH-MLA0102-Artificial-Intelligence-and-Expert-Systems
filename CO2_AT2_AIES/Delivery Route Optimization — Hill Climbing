@@ -1,0 +1,14 @@
+ALGORITHM HILL_CLIMBING
+
+1. Start with the initial delivery route.
+2. Calculate its total distance.
+3. Generate neighbouring routes.
+4. Calculate the distance of every neighbour.
+5. Select the neighbour with the lowest distance.
+6. If the neighbour is better than the current route:
+      Move to the neighbour.
+7. Otherwise:
+      Stop the search.
+8. Repeat Steps 3–7 until no better neighbour exists.
+9. Return the final route.
+10. Stop.
