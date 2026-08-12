@@ -1,0 +1,15 @@
+ALGORITHM ONLINE_SEARCH
+
+Start at charging station S.
+Set the heuristic value H for the current cell.
+Observe the neighbouring cells.
+If an obstacle is detected:
+      a. Mark the cell as BLOCKED.
+      b. Set its cost to infinity.
+a. Mark the cell as BLOCKED.Calculate the cost of each reachable neighbour.
+Select the neighbour with the lowest estimated cost.
+Move to the selected cell.
+Update the heuristic values using the newly discovered information.
+Repeat Steps 3–8 until the target G is reached.
+If a dead end is reached, backtrack and choose another path.
+Stop when G is reached.
