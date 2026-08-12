@@ -1,0 +1,18 @@
+ALGORITHM A* search
+
+1. Start with node S.
+2. Set g(S) = 0.
+3. Calculate f(n) = g(n) + h(n).
+4. Put S into OPEN list.
+5. Repeat until OPEN is empty:
+      a. Select the node with the lowest f value.
+      b. Remove it from OPEN.
+      c. If the node is G:
+            Return the path and cost.
+      d. Expand all neighbouring nodes.
+      e. Calculate:
+            g(child) = g(current) + edge cost
+            f(child) = g(child) + h(child)
+      f. Add/update the child in OPEN.
+6. If OPEN becomes empty, return "No path".
+7. Stop.
