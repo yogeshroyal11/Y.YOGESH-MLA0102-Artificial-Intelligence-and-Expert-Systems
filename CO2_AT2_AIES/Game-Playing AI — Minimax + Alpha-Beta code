@@ -1,0 +1,97 @@
+# Minimax with Alpha-Beta Pruning
+
+tree = [
+    [
+        [3, 5, 6],
+        [9, 1, 2],
+        [0, -1, 4]
+    ],
+    [
+        [7, 5, 8],
+        [6, 2, 3],
+        [4, 0, -2]
+    ],
+    [
+        [1, 2, 3],
+        [5, -1, 2],
+        [6, 4, 7]
+    ]
+]
+
+
+def minimax(node, maximizing):
+    
+    if isinstance(node, int):
+        return node
+
+    values = [
+        minimax(child, not maximizing)
+        for child in node
+    ]
+
+    if maximizing:
+        return max(values)
+    else:
+        return min(values)
+
+
+# Normal Minimax
+values = []
+
+for branch in tree:
+    values.append(minimax(branch, False))
+
+print("MIN values:", values)
+print("Minimax value:", max(values))
+
+
+# Alpha-Beta Pruning
+
+def alpha_beta(node, maximizing, alpha, beta):
+
+    if isinstance(node, int):
+        return node
+
+    if maximizing:
+
+        value = float('-inf')
+
+        for child in node:
+            value = max(
+                value,
+                alpha_beta(child, False, alpha, beta)
+            )
+
+            alpha = max(alpha, value)
+
+            if alpha >= beta:
+                break
+
+        return value
+
+    else:
+
+        value = float('inf')
+
+        for child in node:
+            value = min(
+                value,
+                alpha_beta(child, True, alpha, beta)
+            )
+
+            beta = min(beta, value)
+
+            if alpha >= beta:
+                break
+
+        return value
+
+
+result = alpha_beta(
+    tree,
+    True,
+    float('-inf'),
+    float('inf')
+)
+
+print("Alpha-Beta value:", result)
