@@ -1,0 +1,75 @@
+# Hill Climbing for Delivery Route
+
+distance = {
+    'D': {'A': 6, 'B': 9, 'C': 8, 'E': 7},
+    'A': {'D': 6, 'B': 3, 'C': 5, 'E': 6},
+    'B': {'D': 9, 'A': 3, 'C': 4, 'E': 5},
+    'C': {'D': 8, 'A': 5, 'B': 4, 'E': 3},
+    'E': {'D': 7, 'A': 6, 'B': 5, 'C': 3}
+}
+
+
+def route_cost(route):
+
+    cost = 0
+
+    for i in range(len(route) - 1):
+        cost += distance[route[i]][route[i + 1]]
+
+    return cost
+
+
+def neighbours(route):
+
+    result = []
+
+    # Swap two cities
+    for i in range(1, len(route) - 2):
+
+        for j in range(i + 1, len(route) - 1):
+
+            new_route = route[:]
+
+            new_route[i], new_route[j] = \
+                new_route[j], new_route[i]
+
+            result.append(new_route)
+
+    return result
+
+
+# Initial route
+current = ['D', 'A', 'C', 'B', 'E', 'D']
+
+print("Initial Route:", current)
+print("Initial Cost:", route_cost(current))
+
+while True:
+
+    current_cost = route_cost(current)
+
+    next_routes = neighbours(current)
+
+    best_route = current
+    best_cost = current_cost
+
+    for route in next_routes:
+
+        cost = route_cost(route)
+
+        if cost < best_cost:
+            best_route = route
+            best_cost = cost
+
+    # No better neighbour
+    if best_cost >= current_cost:
+        break
+
+    current = best_route
+
+    print("New Route:", current)
+    print("Cost:", best_cost)
+
+
+print("\nFinal Route:", current)
+print("Final Cost:", route_cost(current))
