@@ -1,0 +1,33 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+# Read CSV file
+data = pd.read_csv("loan_approval_dataset.csv")
+
+# Input and output
+X = data[["Age", "Income", "LoanAmount", "CreditScore"]]
+y = data["Approved"]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Create and train Decision Tree
+model = DecisionTreeClassifier()
+model.fit(X_train, y_train)
+
+# Test the model
+y_pred = model.predict(X_test)
+
+# Accuracy
+print("Accuracy:", accuracy_score(y_test, y_pred) * 100, "%")
+
+# Predict a new customer
+customer = [[35, 60000, 20000, 720]]
+
+result = model.predict(customer)
+
+print("Loan Decision:", result[0])
