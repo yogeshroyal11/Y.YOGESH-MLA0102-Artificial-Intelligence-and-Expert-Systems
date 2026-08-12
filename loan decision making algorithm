@@ -1,0 +1,15 @@
+Algorithm: Loan Approval using Decision Tree Classifier
+Start
+Import the required libraries: Pandas, Decision Tree Classifier, train-test split, and accuracy score.
+Read the loan approval CSV dataset.
+Select Age, Income, LoanAmount, and CreditScore as input features.
+Select Approved as the target variable.
+Split the dataset into training data (80%) and testing data (20%).
+Create a Decision Tree Classifier.
+Train the Decision Tree using the training data.
+Predict the loan approval for the testing data.
+Calculate and display the accuracy of the model.
+Enter the details of a new customer.
+Use the trained Decision Tree to predict whether the loan is Approved or Rejected.
+Display the loan decision.
+Stop.
