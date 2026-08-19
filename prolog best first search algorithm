@@ -1,0 +1,9 @@
+Algorithm
+Start from the initial node.
+Add the initial node to the OPEN list.
+Select the node having the lowest heuristic value.
+Expand that node and generate its neighboring nodes.
+Add the unvisited neighboring nodes to the OPEN list.
+Sort the OPEN list according to heuristic values.
+Repeat until the goal node is reached.
+Return the path from the start node to the goal.
