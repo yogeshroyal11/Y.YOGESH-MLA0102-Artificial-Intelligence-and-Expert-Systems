@@ -1,0 +1,19 @@
+fact(no_power).
+fact(fan_not_working).
+
+rule(power_fault, [no_power, fan_not_working]).
+rule(computer_fault, [power_fault]).
+
+forward :-
+    findall(X, fact(X), Facts),
+    chain(Facts).
+
+chain(Facts) :-
+    rule(Result, Conditions),
+    subset(Conditions, Facts),
+    \+ member(Result, Facts),
+    !,
+    write('Derived: '), write(Result), nl,
+    chain([Result|Facts]).
+
+chain(_).
