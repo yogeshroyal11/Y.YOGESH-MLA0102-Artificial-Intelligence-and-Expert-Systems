@@ -1,0 +1,133 @@
+# Define a Fact class to represent user attributes
+class Fact:
+    def __init__(self, attribute, value):
+        self.attribute = attribute
+        self.value = value
+
+    def __repr__(self):
+        return f"Fact({self.attribute}={self.value})"
+
+    def __eq__(self, other):
+        return isinstance(other, Fact) and self.attribute == other.attribute and self.value == other.value
+
+    def __hash__(self):
+        return hash((self.attribute, self.value))
+# Define the DietExpertSystem class
+class DietExpertSystem:
+    def __init__(self):
+        self.facts = set()  # Stores known facts about the user
+        self.rules = []     # Stores the recommendation rules
+        self.recommendations = set() # Stores derived recommendations
+
+    def add_fact(self, fact):
+        self.facts.add(fact)
+
+    def add_rule(self, rule):
+        self.rules.append(rule)
+
+    def infer(self):
+        # Simple forward chaining inference engine
+        new_recommendations_added = True
+        while new_recommendations_added:
+            new_recommendations_added = False
+            for rule in self.rules:
+                if rule.evaluate(self.facts) and rule.consequent not in self.recommendations:
+                    self.recommendations.add(rule.consequent)
+                    # Optionally, add consequent to facts if it can be used for further inference
+                    # self.facts.add(rule.consequent)
+                    new_recommendations_added = True
+        return list(self.recommendations)
+
+    def reset(self):
+        self.facts = set()
+        self.recommendations = set()
+
+    def display_facts(self):
+        print("\n--- Known Facts ---")
+        for fact in self.facts:
+            print(fact)
+
+    def display_rules(self):
+        print("\n--- Defined Rules ---")
+        for rule in self.rules:
+            print(rule)
+# Create an instance of the expert system
+es = DietExpertSystem()
+
+# --- Define some facts about a user ---
+user_facts = [
+    Fact("age_group", "adult"),
+    Fact("bmi_category", "normal"),
+    Fact("health_condition", "none"),
+    Fact("health_condition", "diabetes") # Example of multiple conditions
+]
+for fact in user_facts:
+    es.add_fact(fact)
+
+# --- Define some diet recommendation rules ---
+rules = [
+    Rule([Fact("age_group", "child")], Fact("diet_plan", "balanced_growth_diet")),
+    Rule([Fact("age_group", "adult"), Fact("bmi_category", "overweight")], Fact("diet_plan", "low_carb_diet")),
+    Rule([Fact("health_condition", "diabetes")], Fact("diet_plan", "diabetic_friendly_diet")),
+    Rule([Fact("age_group", "adult"), Fact("bmi_category", "normal"), Fact("health_condition", "none")], Fact("diet_plan", "general_healthy_eating")),
+    Rule([Fact("health_condition", "hypertension")], Fact("diet_plan", "low_sodium_diet"))
+]
+for rule in rules:
+    es.add_rule(rule)
+
+# Display facts and rules
+es.display_facts()
+es.display_rules()
+
+# --- Infer recommendations ---
+print("\n--- Diet Recommendations ---")
+recommendations = es.infer()
+if recommendations:
+    for rec in recommendations:
+        print(rec)
+else:
+    print("No specific diet recommendations found based on the provided facts and rules.")
+
+# Example with different facts
+print("\n--- Testing with different user facts ---")
+es.reset()
+es.add_fact(Fact("age_group", "child"))
+es.add_fact(Fact("bmi_category", "normal"))
+
+print("\n--- Known Facts for Child User ---")
+es.display_facts()
+print("\n--- Diet Recommendations for Child User ---")
+child_recommendations = es.infer()
+if child_recommendations:
+    for rec in child_recommendations:
+        print(rec)
+else:
+    print("No specific diet recommendations found for the child user.")
+# Reset the expert system for a new test case
+es.reset()
+
+# --- Define facts for the test user ---
+test_user_facts = [
+    Fact("age_group", "adult"),
+    Fact("bmi_category", "overweight"),
+    Fact("health_condition", "hypertension"),
+    Fact("health_condition", "none") # Adding 'none' to ensure it doesn't interfere if 'none' is explicitly checked
+]
+for fact in test_user_facts:
+    es.add_fact(fact)
+
+print("\n--- Test Case: Known Facts for Overweight Adult with Hypertension ---")
+es.display_facts()
+
+print("\n--- Test Case: Diet Recommendations ---")
+test_recommendations = es.infer()
+
+if test_recommendations:
+    for rec in test_recommendations:
+        print(rec)
+else:
+    print("No specific diet recommendations found for this test case.")
+
+# Expected Output:
+# Fact(diet_plan=low_carb_diet)
+# Fact(diet_plan=low_sodium_diet)
