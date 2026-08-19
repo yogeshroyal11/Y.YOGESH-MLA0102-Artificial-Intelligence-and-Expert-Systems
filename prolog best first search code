@@ -1,0 +1,51 @@
+% Best First Search in Prolog
+
+% graph(Start, Next, Cost)
+edge(a, b, 4).
+edge(a, c, 2).
+edge(b, d, 5).
+edge(b, e, 10).
+edge(c, d, 3).
+edge(c, f, 7).
+edge(d, g, 2).
+edge(e, g, 1).
+edge(f, g, 2).
+
+% Heuristic values
+% h(Node, Estimated_Cost_to_Goal)
+h(a, 7).
+h(b, 6).
+h(c, 4).
+h(d, 2).
+h(e, 3).
+h(f, 2).
+h(g, 0).
+
+% Best First Search
+best_first(Start, Goal, Path) :-
+    bfs([node(Start, [Start])], Goal, Path).
+
+bfs([node(Goal, Path)|_], Goal, Path).
+
+bfs([node(Current, Path)|Rest], Goal, Solution) :-
+    findall(
+        node(Next, [Next|Path]),
+        (edge(Current, Next, _),
+         \+ member(Next, Path)),
+        Children
+    ),
+    add_and_sort(Children, Rest, NewQueue),
+    bfs(NewQueue, Goal, Solution).
+
+% Add nodes to queue and sort according to heuristic value
+add_and_sort(Children, Queue, SortedQueue) :-
+    append(Children, Queue, AllNodes),
+    sort_by_heuristic(AllNodes, SortedQueue).
+
+sort_by_heuristic(Nodes, Sorted) :-
+    map_list_to_pairs(get_heuristic, Nodes, Pairs),
+    keysort(Pairs, SortedPairs),
+    pairs_values(SortedPairs, Sorted).
+
+get_heuristic(node(Node, _), H) :-
+    h(Node, H).
