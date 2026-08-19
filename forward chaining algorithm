@@ -1,0 +1,29 @@
+Algorithm: Forward Chaining for Computer Fault Diagnosis
+
+Step 1: Start the program.
+
+Step 2: Define the initial facts:
+
+no_power
+fan_not_working
+
+Step 3: Define the rules:
+
+If no_power AND fan_not_working → power_fault
+If power_fault → computer_fault
+
+Step 4: Collect all available facts using findall().
+
+Step 5: Pass the collected facts to chain().
+
+Step 6: Find a rule whose conditions are satisfied by the available facts.
+
+Step 7: Check whether the rule's conclusion is not already present.
+
+Step 8: Derive the new conclusion and display it.
+
+Step 9: Add the new conclusion to the list of facts.
+
+Step 10: Repeat Steps 6–9 until no new conclusion can be derived.
+
+Step 11: Stop the process.
