@@ -1,0 +1,32 @@
+Algorithm: Medical Diagnosis Using Backward Chaining
+
+Step 1: Start the program.
+
+Step 2: Define the patient's symptoms:
+
+Fever
+Cough
+Headache
+Body pain
+Sore throat
+
+Step 3: Define the disease rules:
+
+Fever + cough + body pain → Flu
+Cough + sore throat → Cold
+Fever + headache + body pain → Malaria
+
+Step 4: Start the diagnosis with the goal diagnose(Disease).
+
+Step 5: Prolog checks the rule:
+diagnose(Disease) :- disease(Disease).
+
+Step 6: Prolog tries to prove disease(Disease) by checking each disease rule.
+
+Step 7: For each disease, check whether all required symptoms are available.
+
+Step 8: If all symptoms required by a rule are true, conclude that the disease is a possible diagnosis.
+
+Step 9: Continue checking other disease rules to find all possible diagnoses.
+
+Step 10: Display the possible diseases and stop when no more solutions are found.
