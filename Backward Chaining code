@@ -1,0 +1,30 @@
+% Medical Diagnosis using Backward Chaining
+
+symptom(fever).
+symptom(cough).
+symptom(headache).
+symptom(body_pain).
+symptom(sore_throat).
+
+% Rules for diseases
+
+disease(flu) :-
+    symptom(fever),
+    symptom(cough),
+    symptom(body_pain).
+
+disease(cold) :-
+    symptom(cough),
+    symptom(sore_throat).
+
+disease(malaria) :-
+    symptom(fever),
+    symptom(headache),
+    symptom(body_pain).
+
+% Diagnosis
+diagnose(Disease) :-
+    disease(Disease).
+
+% Query:
+% ?- diagnose(X).
