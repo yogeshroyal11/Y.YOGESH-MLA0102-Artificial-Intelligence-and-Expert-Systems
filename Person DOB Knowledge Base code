@@ -1,0 +1,16 @@
+% Person DOB Knowledge Base
+
+% Facts: person(Name, DateOfBirth).
+person(rahul, date(15, 5, 2002)).
+person(priya, date(20, 8, 2001)).
+person(amit, date(10, 12, 2003)).
+person(sneha, date(25, 3, 2002)).
+person(kiran, date(5, 7, 2001)).
+
+% Rule to find a person's date of birth
+get_dob(Name, DOB) :-
+    person(Name, DOB).
+
+% Rule to find a person using date of birth
+find_person(DOB, Name) :-
+    person(Name, DOB).
