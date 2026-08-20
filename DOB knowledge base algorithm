@@ -1,0 +1,10 @@
+Algorithm: Person DOB Knowledge Base in Prolog
+Start
+Define person facts with their name and date of birth.
+Create a rule get_dob(Name, DOB) to retrieve the DOB of a given person.
+Create a rule find_person(DOB, Name) to find a person using their DOB.
+Enter a query with a person's name or date of birth.
+Prolog searches the knowledge base for matching facts.
+If a match is found, display the person's details.
+If no match is found, return no result.
+Stop.
