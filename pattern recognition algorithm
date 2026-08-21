@@ -1,0 +1,50 @@
+START
+
+1. LOAD the image
+   - Read "image.jpg" from the script's folder
+   IF image not found THEN
+       STOP with error
+   END IF
+
+2. PREPROCESS the image
+   a. Convert image from color (BGR) to grayscale
+   b. Apply Canny edge detection (thresholds 50, 150)
+      → produces a binary image showing edges
+
+3. FIND contours (shape boundaries)
+   - Use cv2.findContours() on the edge image
+   - This returns a list of all closed boundary outlines found
+
+4. FOR EACH contour found:
+
+   a. CALCULATE its area
+      IF area < 200 THEN
+          SKIP this contour (treat as noise)
+      END IF
+
+   b. APPROXIMATE the contour shape
+      - Calculate perimeter (arc length)
+      - Simplify contour into a polygon using approxPolyDP
+      - Count the number of corners/vertices in the polygon
+
+   c. CLASSIFY the shape based on vertex count:
+      IF corners == 3 THEN shape = "Triangle"
+      ELSE IF corners == 4 THEN shape = "Rectangle"
+      ELSE IF corners == 5 THEN shape = "Pentagon"
+      ELSE shape = "Circle"
+      END IF
+
+   d. GET bounding box coordinates (x, y, w, h) of the shape
+      - Used to position the text label
+
+   e. DRAW the contour outline on the image (green)
+
+   f. WRITE the shape name as text near the shape (red)
+
+5. DISPLAY the final image with all shapes outlined and labeled
+
+6. WAIT for a key press
+
+7. CLOSE all windows
+
+END
