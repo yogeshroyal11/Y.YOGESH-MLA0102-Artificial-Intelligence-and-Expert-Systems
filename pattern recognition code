@@ -1,0 +1,40 @@
+import cv2
+import os
+
+# Load image
+script_dir = os.path.dirname(os.path.abspath(__file__))
+img = cv2.imread(os.path.join(script_dir, "image.jpg"))
+
+if img is None:
+    raise FileNotFoundError("image.jpg not found in script folder")
+
+# Preprocess
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+edges = cv2.Canny(gray, 50, 150)
+
+# Find shapes
+contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+for cnt in contours:
+    if cv2.contourArea(cnt) < 200:
+        continue
+
+    approx = cv2.approxPolyDP(cnt, 0.03 * cv2.arcLength(cnt, True), True)
+    corners = len(approx)
+
+    if corners == 3:
+        shape = "Triangle"
+    elif corners == 4:
+        shape = "Rectangle"
+    elif corners == 5:
+        shape = "Pentagon"
+    else:
+        shape = "Circle"
+
+    x, y, w, h = cv2.boundingRect(approx)
+    cv2.drawContours(img, [cnt], -1, (0, 255, 0), 2)
+    cv2.putText(img, shape, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
+
+cv2.imshow("Result", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
