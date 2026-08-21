@@ -1,0 +1,79 @@
+% ================================
+% Medical Expert System in Prolog
+% ================================
+
+% Facts: symptoms reported for the patient (asserted dynamically)
+:- dynamic(has_symptom/1).
+:- dynamic(known_disease/1).
+
+% ---- Rules: disease :- symptoms ----
+
+disease(flu) :-
+    has_symptom(fever),
+    has_symptom(cough),
+    has_symptom(body_ache).
+
+disease(measles) :-
+    has_symptom(fever),
+    has_symptom(rash),
+    has_symptom(runny_nose).
+
+disease(malaria) :-
+    has_symptom(fever),
+    has_symptom(chills),
+    has_symptom(sweating).
+
+disease(common_cold) :-
+    has_symptom(cough),
+    has_symptom(runny_nose),
+    has_symptom(sneezing).
+
+disease(covid19) :-
+    has_symptom(fever),
+    has_symptom(cough),
+    has_symptom(loss_of_taste).
+
+disease(typhoid) :-
+    has_symptom(fever),
+    has_symptom(abdominal_pain),
+    has_symptom(weakness).
+
+% ---- Inference: collect all diseases matching current symptoms ----
+
+diagnose(Diseases) :-
+    findall(D, disease(D), Diseases).
+
+% ---- Utility predicates ----
+
+add_symptom(S) :-
+    ( has_symptom(S) -> true ; assertz(has_symptom(S)) ).
+
+remove_symptom(S) :-
+    retractall(has_symptom(S)).
+
+reset_symptoms :-
+    retractall(has_symptom(_)).
+
+show_symptoms :-
+    findall(S, has_symptom(S), List),
+    write('Current symptoms: '), write(List), nl.
+
+% ---- Interactive query loop ----
+
+run :-
+    reset_symptoms,
+    write('Enter symptoms one by one (type done. to finish):'), nl,
+    read_symptoms,
+    show_symptoms,
+    diagnose(Diseases),
+    ( Diseases == []
+    -> write('No matching disease found for given symptoms.'), nl
+    ;  write('Possible disease(s): '), write(Diseases), nl
+    ).
+
+read_symptoms :-
+    read(S),
+    ( S == done
+    -> true
+    ;  add_symptom(S), read_symptoms
+    ).
