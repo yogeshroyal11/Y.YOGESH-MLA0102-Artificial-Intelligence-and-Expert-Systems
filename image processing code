@@ -1,0 +1,25 @@
+import cv2
+import os
+
+# Build path relative to this script's location so it works regardless of the working directory
+script_dir = os.path.dirname(os.path.abspath(__file__))
+image_path = os.path.join(script_dir, "image.jpg")
+
+# Read image
+img = cv2.imread(image_path)
+
+# Check if the image was loaded successfully
+if img is None:
+    raise FileNotFoundError(f"Could not load image at: {image_path}. Check that the file exists and the name/extension is correct.")
+
+# Convert to grayscale
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Detect edges
+edges = cv2.Canny(gray, 100, 200)
+
+# Display detected pattern
+cv2.imshow("Pattern", edges)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
