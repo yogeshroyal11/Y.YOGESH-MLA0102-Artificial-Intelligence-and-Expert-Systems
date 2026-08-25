@@ -1,0 +1,109 @@
+# Question 5: Explainable and Generalizable AI
+# Inductive Learning + Explanation-Based Learning
+
+from sklearn.tree import DecisionTreeClassifier, export_text
+
+# ---------------------------------------------------------
+# 1. TRAINING DATA
+# ---------------------------------------------------------
+
+# Features:
+# Attendance (%), Internal Mark, Assignment Mark
+
+X = [
+    [90, 85, 90],
+    [80, 75, 80],
+    [95, 90, 95],
+    [60, 50, 55],
+    [55, 45, 50],
+    [70, 65, 60],
+    [85, 80, 85],
+    [50, 40, 45]
+]
+
+# 1 = Pass, 0 = Fail
+y = [1, 1, 1, 0, 0, 1, 1, 0]
+
+# ---------------------------------------------------------
+# 2. INDUCTIVE LEARNING
+# ---------------------------------------------------------
+
+model = DecisionTreeClassifier(
+    max_depth=3,
+    random_state=42
+)
+
+# Learn general rules from examples
+model.fit(X, y)
+
+print("===== INDUCTIVE LEARNING =====")
+
+rules = export_text(
+    model,
+    feature_names=[
+        "Attendance",
+        "Internal Mark",
+        "Assignment Mark"
+    ]
+)
+
+print("Learned Decision Rules:")
+print(rules)
+
+# ---------------------------------------------------------
+# 3. PREDICTION
+# ---------------------------------------------------------
+
+new_student = [[82, 78, 80]]
+
+prediction = model.predict(new_student)
+
+if prediction[0] == 1:
+    print("Prediction: PASS")
+else:
+    print("Prediction: FAIL")
+
+# ---------------------------------------------------------
+# 4. EXPLANATION-BASED LEARNING
+# ---------------------------------------------------------
+
+attendance = new_student[0][0]
+internal = new_student[0][1]
+assignment = new_student[0][2]
+
+print("\n===== EXPLANATION-BASED LEARNING =====")
+
+print("Student Details:")
+print("Attendance:", attendance)
+print("Internal Mark:", internal)
+print("Assignment Mark:", assignment)
+
+# Generate a simple explanation
+reasons = []
+
+if attendance >= 75:
+    reasons.append("Attendance is sufficient")
+else:
+    reasons.append("Attendance is low")
+
+if internal >= 50:
+    reasons.append("Internal mark is sufficient")
+else:
+    reasons.append("Internal mark is low")
+
+if assignment >= 50:
+    reasons.append("Assignment performance is sufficient")
+else:
+    reasons.append("Assignment performance is low")
+
+print("\nExplanation:")
+
+for reason in reasons:
+    print("-", reason)
+
+if prediction[0] == 1:
+    print("\nFinal Decision: PASS")
+    print("Reason: The student satisfies the learned conditions.")
+else:
+    print("\nFinal Decision: FAIL")
+    print("Reason: The student does not satisfy the learned conditions.")
