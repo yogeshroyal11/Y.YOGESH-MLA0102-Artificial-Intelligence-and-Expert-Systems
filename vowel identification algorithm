@@ -1,0 +1,8 @@
+Algorithm
+Start
+Read a sentence from the user.
+Examine each character in the sentence.
+Check whether the character is a, e, i, o, u.
+If yes, identify it as a vowel.
+Display all identified vowels.
+Stop
