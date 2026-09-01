@@ -1,0 +1,11 @@
+Algorithm – Artificial Neural Network
+Start
+Import the required Python libraries.
+Create the dataset containing patient medical features and disease labels.
+Split the dataset into training and testing data.
+Create an Artificial Neural Network (MLP) classifier.
+Train the neural network using the training data.
+Test the model using the testing data.
+Calculate and display the accuracy.
+Predict whether a new patient has the disease.
+Stop
